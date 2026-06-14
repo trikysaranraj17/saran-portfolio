@@ -147,6 +147,31 @@ export default function Home() {
     card.style.boxShadow = '';
   };
 
+  const handleProfileMouseMove = (e) => {
+    const card = document.getElementById('about-profile-card');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+    // Rotate maximum 15 degrees
+    const tiltX = -(y - yc) / 8;
+    const tiltY = (x - xc) / 8;
+
+    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-5px) translateZ(15px)`;
+    card.style.boxShadow = `0 30px 60px rgba(0, 245, 255, 0.25), 0 0 40px rgba(191, 0, 255, 0.2)`;
+    card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+    card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+  };
+
+  const handleProfileMouseLeave = () => {
+    const card = document.getElementById('about-profile-card');
+    if (!card) return;
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) translateZ(0px)';
+    card.style.boxShadow = '';
+  };
+
   // --- 4. CONTACT FORM TRANSMIT SUBMIT ---
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -373,7 +398,24 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="about-scene-placeholder" style={{ pointerEvents: 'none' }} />
+          <div className="about-image-wrap">
+            <div 
+              id="about-profile-card"
+              className="about-profile-card glass interactive"
+              onMouseMove={handleProfileMouseMove}
+              onMouseLeave={handleProfileMouseLeave}
+            >
+              <div className="profile-img-container">
+                <img src="/profile.png" alt="Saranraj Portrait" className="profile-img" />
+                <div className="profile-glow-effect" />
+                <div className="profile-grid-lines" />
+              </div>
+              <div className="profile-card-badge">
+                <Icons.Zap size={14} className="pulse-slow" style={{ color: 'var(--primary-neon)' }} /> ACTIVE SYSTEM_DEV
+              </div>
+              <div className="holo-shimmer" />
+            </div>
+          </div>
         </div>
       </section>
 
