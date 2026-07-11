@@ -31,7 +31,7 @@ html, body {
   color: var(--text-primary);
   font-family: var(--font-space-grotesk-family);
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1098,12 +1098,24 @@ p {
   }
   .section {
     padding: 100px 5% 60px 5%;
+    overflow-x: hidden;
   }
   .hero-content {
     width: 100%;
+    overflow-x: hidden;
   }
   .hero-title {
-    font-size: 3.2rem;
+    font-size: 2.6rem;
+    word-wrap: break-word;
+  }
+  .about-heading,
+  .services-heading,
+  .skills-heading,
+  .contact-heading,
+  .projects-page-title {
+    font-size: 1.8rem !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   .skills-split {
     grid-template-columns: 1fr;
@@ -1112,9 +1124,12 @@ p {
     padding: 0;
   }
   .project-card {
-    width: 320px;
-    height: 480px;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    min-height: 440px;
     padding: 25px;
+    margin: 0 auto;
   }
   .contact-container {
     grid-template-columns: 1fr;
@@ -1123,8 +1138,14 @@ p {
     padding: 25px;
   }
   .loader-counter {
-    font-size: 5rem;
+    font-size: 4rem;
   }
+}
+
+.mobile-scroll-container {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1551,8 +1572,38 @@ next-route-announcer,
   }
   
   .about-profile-card {
-    width: 320px;
+    width: 100%;
+    max-width: 320px;
     height: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* Extra overrides for small mobile screens to prevent right-side text overflow */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.0rem;
+    letter-spacing: 0.05em;
+  }
+  .about-heading,
+  .services-heading,
+  .skills-heading,
+  .contact-heading,
+  .projects-page-title {
+    font-size: 1.5rem !important;
+  }
+  .portfolio-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.3rem;
+  }
+  .stat-card {
+    padding: 15px 10px;
+  }
+  .stat-number {
+    font-size: 1.6rem;
+  }
+  .stat-label {
+    font-size: 9px;
   }
 }
 
